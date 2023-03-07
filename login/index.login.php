@@ -39,6 +39,10 @@ endif;
 
 <form method="post" class="connexion">
     <div>
+        <label for="pseudo">Pseudo</label>
+        <input type="text" name="pseudo" id="pseudo">
+    </div>
+    <div>
         <label for="email">E-mail</label>
         <input type="email" name="email" id="email" required>
     </div>
