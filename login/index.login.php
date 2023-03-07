@@ -20,13 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         echo 'Votre email n\'est pas enregistrée comme utilisateur de notre site.';
         exit();
     else :
-        // if (password_verify($pwd, $resultatEmail['pwd'])) :
+        if (password_verify($pwd, $resultatEmail['pwd'])) :
         $_SESSION['login'] = true;
 
         header('location: http://localhost/movies');
-        // else :
+         else :
         echo 'Votre mot de passe n\'est pas valide';
-    // endif;
+    endif;
 
     endif;
 

@@ -9,32 +9,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
     $email = $_POST['email'];
     //$date = Date('yy-m-d H:i:s');
     $pwd = $_POST['pwd'];
+    $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+    // dd($pwd);
 
+    //  if (!isset($email)) :
     // création requête
     $sql = "INSERT INTO user (login, pwd,created_at,email) VALUES (:pseudo,:pwd,now(),:email)";
     $resultat = $conn->prepare($sql);
     $resultat->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
     $resultat->bindValue(':pwd', $pwd, PDO::PARAM_STR);
-  //  $resultat->bindValue(':date', $date);
     $resultat->bindValue(':email', $email, PDO::PARAM_STR);
     $resultat->execute();
-   // $resultatSql = array($resultat);
 
-//dd();
-/*
-    //exécution requête
-    if ($resultat->execute()) :
-        echo 'Les données ont été enregistrées avec succès';
+//else :
+//  echo 'L\'e-mail est déjà connu.';
 
-    else :
-        echo "Erreur : " . $erreur->getMessage();
-
-    endif;
-*/
-
-    //fermer connexion
-   // $conn = null;
-
+// endif;
 endif;
 ?>
 
