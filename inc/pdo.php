@@ -10,12 +10,9 @@ try{
 $conn = new PDO(
     $dsn,
     $userDbName,
-    $userPasswordDbName,[
-    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING
-]);
-
+    $userPasswordDbName);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
 } catch (PDOException $erreur) {
     echo 'Erreur de connexion :' . $erreur->getMessage();
 }

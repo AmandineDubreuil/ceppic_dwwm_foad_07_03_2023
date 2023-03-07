@@ -1,32 +1,38 @@
 <?php
 require_once './inc/fonctions.php';
 require_once './inc/pdo.php';
+require_once './partials/head.php';
 
 // liaison des champs
-$pseudo = $_POST['pseudo'];
-$email = $_POST['email'];
-$pwd = $_POST['pwd'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') :
+    $pseudo = $_POST['pseudo'];
+    $email = $_POST['email'];
+    $date = Date('yy-m-d H:i:s');
+    $pwd = $_POST['pwd'];
 
-// création requête
-$sql = "INSERT INTO user ('id_user','login','pwd','created_at','email') VALUES (null, ':pseudo',':pwd','',':email')";
-$resultat = $conn->prepare($sql);
-$resultat ->bindParam(':pseudo', $pseudo);
-$resultat ->bindParam(':pwd', $pwd);
-$resultat ->bindParam(':email', $email);
+    // création requête
+    $sql = "INSERT INTO user ('id_user','login','pwd','created_at','email') VALUES (null, ':pseudo',':pwd',':date',':email')";
+    $resultat = $conn->prepare($sql);
+    $resultat->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+    $resultat->bindValue(':pwd', $pwd, PDO::PARAM_STR);
+    $resultat->bindValue(':date', $date);
+    $resultat->bindValue(':email', $email, PDO::PARAM_STR);
+   // $resultatSql = array($resultat);
 
+dd();
+    //exécution requête
+    if ($resultat->execute()) :
+        echo 'Les données ont été enregistrées avec succès';
 
-//exécution requête
-if ($resultat->execute()) :
-echo 'Les données ont été enregistrées avec succès';
+    else :
+        echo "Erreur : " . $erreur->getMessage();
 
-else :
-    echo "Erreur : ". $erreur->getMessage();
+    endif;
+
+    //fermer connexion
+   // $conn = null;
 
 endif;
-
-//fermer connexion
-$conn = null;
-
 ?>
 
 
@@ -48,5 +54,9 @@ $conn = null;
         <input type="password" name="confPwd" id="confPwd" required>
     </div>
 
-    <input type="submit" value="Connexion">
+    <input type="submit" value="Enregistrement">
 </form>
+
+
+<?php
+require_once './partials/foot.php';

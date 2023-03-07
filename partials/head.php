@@ -32,6 +32,7 @@
                 <?php
                 }
                 ?>
+                <li><a href="registerForm.php">Inscription</a></li>
             </ul>
         </nav>
     </header>
