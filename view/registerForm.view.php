@@ -7,19 +7,21 @@ require_once './partials/head.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') :
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
-    $date = Date('yy-m-d H:i:s');
+    //$date = Date('yy-m-d H:i:s');
     $pwd = $_POST['pwd'];
 
     // création requête
-    $sql = "INSERT INTO user ('id_user','login','pwd','created_at','email') VALUES (null, ':pseudo',':pwd',':date',':email')";
+    $sql = "INSERT INTO user (login, pwd,created_at,email) VALUES (:pseudo,:pwd,now(),:email)";
     $resultat = $conn->prepare($sql);
     $resultat->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
     $resultat->bindValue(':pwd', $pwd, PDO::PARAM_STR);
-    $resultat->bindValue(':date', $date);
+  //  $resultat->bindValue(':date', $date);
     $resultat->bindValue(':email', $email, PDO::PARAM_STR);
+    $resultat->execute();
    // $resultatSql = array($resultat);
 
-dd();
+//dd();
+/*
     //exécution requête
     if ($resultat->execute()) :
         echo 'Les données ont été enregistrées avec succès';
@@ -28,6 +30,7 @@ dd();
         echo "Erreur : " . $erreur->getMessage();
 
     endif;
+*/
 
     //fermer connexion
    // $conn = null;
