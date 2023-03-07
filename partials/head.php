@@ -28,7 +28,7 @@
                 <?php
                 } else {
                 ?>
-                    <li><a href="./login/index.php">Connexion</a></li>
+                    <li><a href="./login/index.login.php">Connexion</a></li>
                 <?php
                 }
                 ?>
