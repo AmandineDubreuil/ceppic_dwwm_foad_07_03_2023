@@ -45,8 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         $resultat->bindValue(':pwd', $pwd, PDO::PARAM_STR);
         $resultat->bindValue(':email', $email, PDO::PARAM_STR);
         $resultat->execute();
-    else :
-        dbug($error);
+    
     endif;
 
 endif;
